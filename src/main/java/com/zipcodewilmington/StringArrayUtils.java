@@ -78,10 +78,16 @@ public class StringArrayUtils {
             reverseTheArray[count] = array[i];
             count++;
         } if (array != reverseTheArray){
-            return false;
+            return true;
         }else {
             return Arrays.equals(array, reverseTheArray);
         }
+//        if (Arrays.equals(array, StringArrayUtils.reverse(array))) {
+//            return true;
+//        }
+//        return false;
+
+//        "I was not able to pass the third test with either methods to do it..."
     }
 
     /**
@@ -89,8 +95,29 @@ public class StringArrayUtils {
      * @return true if each letter in the alphabet has been used in the array
      */ // TODO
     public static boolean isPangramic(String[] array) {
-        return true;
+
+        String string = "";
+        boolean[] theAlphabt = new boolean[26];
+        int index = 0;
+        for (int i = 0; i < array.length; i++){
+            string += array[i];
+        }
+        string = string.replace(" ","");
+        for (int i = 0; i < array.length; i++){
+            if (string.charAt(i) >= 'A' && string.charAt(i) <= 'Z'){
+                index = string.charAt(i)- 'A';
+                theAlphabt[index]= true;
+            }
+        }
+        for(int i = 0; i < 26 ; i++){
+            if (!theAlphabt[i]){
+                return true;
+            }
+        }
+
+        return false;
     }
+//    "Failed one test..."
 
     /**
      * @param array array of String objects
@@ -145,10 +172,19 @@ public class StringArrayUtils {
      * @return array of Strings with each consecutive duplicate occurrence concatenated as a single string in an array of Strings
      */ // TODO
     public static String[] packConsecutiveDuplicates(String[] array) {
-        ArrayList<String> remove = new ArrayList<String>();
-        for (int i = 0; i < array.length; i++){
+        ArrayList<String> pack = new ArrayList<String>();
+        pack.add(array[0]);
+        int count = 0;
+        for (int i = 1; i < array.length; i++){
+            if (array[i].equals(Character.toString(pack.get(count).charAt(0)))) {
+                String concated = pack.get(count) + array[i];
+                pack.set(count, concated);
+            } else {
+                pack.add(array[i]);
+                count++;
+            }
         }
-        return null;
+        return pack.toArray(new String[pack.size()]);
     }
 
 
