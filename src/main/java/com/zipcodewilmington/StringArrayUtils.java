@@ -177,8 +177,8 @@ public class StringArrayUtils {
         int count = 0;
         for (int i = 1; i < array.length; i++){
             if (array[i].equals(Character.toString(pack.get(count).charAt(0)))) {
-                String concated = pack.get(count) + array[i];
-                pack.set(count, concated);
+                String consecutive = pack.get(count) + array[i];
+                pack.set(count, consecutive);
             } else {
                 pack.add(array[i]);
                 count++;
